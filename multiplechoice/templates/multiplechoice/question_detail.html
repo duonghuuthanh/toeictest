@@ -1,0 +1,8 @@
+<p>Question Detail {{question.pk}}</p>
+
+<p>{{question.content}}</p>
+{% for answer in question.answer_set.all %}
+    <p style="{% if answer.correct_percent == 100 %}color:blue;{% endif %}">
+        {{answer.content}}
+    </p>
+{% endfor %}

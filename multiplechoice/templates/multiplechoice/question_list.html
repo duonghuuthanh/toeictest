@@ -1,0 +1,26 @@
+{% load filter %}
+
+<p>Welcome to <b>TOEIC TEST.</b></p>
+
+<div class="pagination">
+{% if page_obj.has_previous %}
+    <a href="?page={{page_obj.previous_page_number}}"><<</a>
+{% endif %}
+
+{{ page_obj.number }}/{{ paginator.num_pages }}
+
+{% if page_obj.has_next %}
+    <a href="?page={{page_obj.next_page_number}}">>></a>
+{% endif %}
+</div>
+
+{% for question in questions %}
+    <p><a href="{% url 'question-detail' question.id %}">{{question.id}}</a> - {{question.content}}</p>
+    <p>
+        {% for answer in question.answer_set.all %}
+            <p>{{forloop.counter0|option_label}} - {{answer.content}}</p>
+        {% endfor %}
+    </p>
+{% endfor %}
+
+<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script> -->
